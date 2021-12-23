@@ -20,11 +20,18 @@
                 <a href="{% url 'index' %}" class="navbar-brand">Furniture Rental</a>
                 <div class="d-flex">
                     {% if user.is_authenticated %}
-                    <div class="p-2">
-                        <p class="fw-bold text-primary">{{ request.user.username }}</p>
-                    </div>
-                    <div class="p-2">
-                        <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout</a>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ request.user.username }}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
                     </div>
                     {% else %}
                     <div class="p-2">
@@ -34,7 +41,6 @@
                         <a href="{% url 'register' %}" class="btn btn-primary">Register</a>
                     </div>
                     {% endif %}
-
                 </div>
             </div>
         </nav>
