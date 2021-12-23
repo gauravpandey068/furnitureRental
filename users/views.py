@@ -47,11 +47,15 @@ def profile(request):
 
 
 @login_required(login_url='login')
-def editProfile(request):
+def billingAddress(request):
 
     if request.method == "POST":
-        pass
+        form = UserInformationForm(request.POST)
+        if form.is_valid():
+            form.changed_data
+            form.save()
+            return redirect('profile')
     else:
         form = UserInformationForm()
 
-    return render(request, 'edit_profile.html',  {"form": form})
+    return render(request, 'billing_address.html',  {"form": form})
