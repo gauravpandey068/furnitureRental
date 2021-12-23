@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Profile {% endblock %}
+{%block content %}
+
+<div class="card mt-5">
+    <div class="card-header d-flex justify-content-between">
+        <div class="badge bg-primary text-wrap fs-5">
+            Profile
+        </div>
+
+        <a href="{% url 'edit-profile' %}" class="btn btn-danger">Edit Profile</a>
+
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item p-3">
+            <div class="row">
+                <strong>Name</strong>
+                <p>
+                    <strong>
+                        {{name}}
+                    </strong>
+                </p>
+            </div>
+        </li>
+        <li class="list-group-item p-3">
+            <div class="row">
+                <strong>Username</strong>
+                <p>
+                    <strong>
+                        {{username}}
+                    </strong>
+                </p>
+            </div>
+        </li>
+        <li class="list-group-item p-3">
+            <div class="row">
+                <strong>Email Address</strong>
+                <p>
+                    <strong>
+                        {{email}}
+                    </strong>
+                </p>
+            </div>
+        </li>
+        <li class="list-group-item p-3">
+            <div class="row">
+                <strong>Phone</strong>
+                <p>
+                    <strong>
+                        {{phone}}
+                    </strong>
+                </p>
+            </div>
+        </li>
+        <li class="list-group-item p-3">
+            <div class="row">
+                <strong>Delivery Address</strong>
+                <p>
+                    <strong>
+                        {{address}}
+                    </strong>
+                </p>
+            </div>
+        </li>
+    </ul>
+</div>
+
+{% endblock %}
