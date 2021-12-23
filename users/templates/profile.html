@@ -8,59 +8,70 @@
             Profile
         </div>
 
-        <a href="{% url 'edit-profile' %}" class="btn btn-danger">Edit Profile</a>
+        <a href="#" class="btn btn-danger">Edit Profile</a>
 
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item p-3">
-            <div class="row">
-                <strong>Name</strong>
-                <p>
-                    <strong>
-                        {{name}}
-                    </strong>
-                </p>
-            </div>
+
+            <strong>Name</strong>
+            <p>
+                <strong>
+                    {{name}}
+                </strong>
+            </p>
+
         </li>
         <li class="list-group-item p-3">
-            <div class="row">
-                <strong>Username</strong>
-                <p>
-                    <strong>
-                        {{username}}
-                    </strong>
-                </p>
-            </div>
+
+            <strong>Username</strong>
+            <p>
+                <strong>
+                    {{username}}
+                </strong>
+            </p>
+
         </li>
         <li class="list-group-item p-3">
-            <div class="row">
-                <strong>Email Address</strong>
-                <p>
-                    <strong>
-                        {{email}}
-                    </strong>
-                </p>
-            </div>
+
+            <strong>Email Address</strong>
+            <p>
+                <strong>
+                    {{email}}
+                </strong>
+            </p>
+
         </li>
         <li class="list-group-item p-3">
-            <div class="row">
-                <strong>Phone</strong>
-                <p>
-                    <strong>
-                        {{phone}}
-                    </strong>
-                </p>
-            </div>
+
+            <strong>Phone</strong>
+            <p>
+                <strong>
+                    {{phone}}
+                </strong>
+            </p>
+
         </li>
         <li class="list-group-item p-3">
-            <div class="row">
-                <strong>Delivery Address</strong>
-                <p>
-                    <strong>
-                        {{address}}
-                    </strong>
-                </p>
-            </div>
+
+            <strong>Delivery Address</strong>
+            <p>
+                <strong>
+                    <address>{{address}}</address>
+                </strong>
+            </p>
+
+        </li>
+
+        <li class="list-group-item p-3">
+            <a href="#" class="btn btn-primary">Change Password</a>
+        </li>
+        <li class="list-group-item p-3">
+            {% if address %}
+            <a href="{% url 'billing-address' %}" class="btn btn-primary">Edit Billing Address</a>
+            {% else%}
+            <a href="{% url 'billing-address' %}" class="btn btn-primary">Add Billing Address</a>
+            {% endif %}
         </li>
     </ul>
 </div>
