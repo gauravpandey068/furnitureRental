@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.views.generic import UpdateView
-
-from users.forms import UserForm, UserInformationForm
+from users.forms import UserForm, UserInformationForm, EditProfileForm
 from users.models import UserInformation
 
 
@@ -67,3 +65,15 @@ def edit_billing_address(request):
         form = UserInformationForm(initial={'phone': phone, 'delivery_address': address})
 
     return render(request, 'billing_address.html', {"form": form})
+
+
+@login_required(login_url='login')
+def edit_profile(request):
+    if request.method == "POST":
+        form = EditProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+    return render(request, 'edit_profile.html', {"form": form})
