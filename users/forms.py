@@ -25,3 +25,6 @@ class UserInformationForm(forms.Form):
     class Meta:
         model = UserInformation
         fields = ('phone', 'delivery_address')
+
+
+
