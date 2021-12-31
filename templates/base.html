@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <header class="container">
+    <header class="">
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
                 <a href="{% url 'index' %}" class="navbar-brand">Furniture Rental</a>
@@ -26,6 +26,9 @@
                             {{ request.user.username }}
                         </button>
                         <ul class="dropdown-menu">
+                            {% if request.user.is_staff %}
+                                <li><a class="dropdown-item" href="{% url 'dashboard' %}">DashBoard</a></li>
+                            {% endif %}
                             <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider" />
@@ -46,7 +49,9 @@
         </nav>
     </header>
 
-    <div class="container">{% block content %} {% endblock %}</div>
+    <div class="">
+        {% block content %} {% endblock %}
+    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

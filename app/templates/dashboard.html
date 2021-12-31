@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="d-flex">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h4>Dashboard</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="#">Users</a></li>
+                    <li class="list-group-item"><a href="#">Posts</a></li>
+                    <li class="list-group-item"><a href="#">Comments</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-header">
+                <h4>Dashboard</h4>
+            </div>
+            <div class="card-body">
+                <h1>Welcome to the dashboard!</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

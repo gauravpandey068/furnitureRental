@@ -8,7 +8,7 @@ urlpatterns = [
         'change-password/',
         auth_views.PasswordChangeView.as_view(template_name='registration/change_password.html',
                                               success_url='change-password-done'), name='change-password'
-    ),  # TODO: redirect to change password done page
+    ),
     path(
         'change-password-done/',
         auth_views.PasswordChangeDoneView.as_view(template_name='registration/success_password_change.html'),
