@@ -1,2 +1,2 @@
-from .home import index
-from .dashboard import dashboard
+from .home import *
+from .dashboard import *
