@@ -1,7 +1,8 @@
 {% extends 'db_base.html' %}
 {% load crispy_forms_filters %}
 
-{% block db_title %}Add Product Info{% endblock %}
+{% block db_title %}Product Info: {{ product.name }}{% endblock %}
+
 {% block db_content %}
     <div class="col-sm-7 p-3">
     <form method="post" class="form-group">
