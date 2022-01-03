@@ -26,3 +26,11 @@ def add_product(request):
         form = ProductForm()
 
     return render(request, 'add_product.html', {"form": form})
+
+
+@login_required(login_url='/login/')
+@staff_member_required()
+def delete_product(request, product_id):
+    product = Product.objects.get(id=product_id)
+    product.delete()
+    return redirect('dashboard')
