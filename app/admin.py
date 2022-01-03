@@ -3,8 +3,8 @@ from app.models import Product
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'stock', 'available')
-    list_filter = ('stock', 'available', 'created_at', 'updated_at')
+    list_display = ('name', 'price', 'available')
+    list_filter = ('available', 'created_at', 'updated_at')
     search_fields = ['name']
 
 
