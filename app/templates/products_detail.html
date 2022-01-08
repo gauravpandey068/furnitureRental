@@ -1,0 +1,40 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %}Furniture Rental: {{ product.name }}{% endblock %}
+{% block content %}
+<div class="d-flex">
+    <div class="col-md-9">
+        <div class="d-flex">
+            <div class="col-md-6">
+                <img src="{{ product.image.url }}"  width="700" height="500" alt="{{ product.name }}" class="img-fluid p-3">
+            </div>
+            <div class="col-md-6 p-3">
+                <h4>{{ product.name.title }}</h4>
+                <p><span class="badge bg-primary mt-1">{{ product.brand }}</span></p>
+
+                <h3 class="text-warning mt-5">Rs: {{ product.price }}</h3>
+
+                <div class="mt-4 mb-4">
+                {% if product.available %}
+                    <a href="#" class="btn btn-primary">Rent Now</a>
+                    {% else %}
+                    <p class="text-danger">Out of stock</p>
+                {% endif %}
+
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        {{ product.description|linebreaks }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md">
+        <h4 class="text-center">You may also like</h4>
+    </div>
+</div>
+{% endblock %}
