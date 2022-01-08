@@ -11,6 +11,7 @@ urlpatterns = [
     path('dashboard/product/delete/<int:product_id>/', views.delete_product, name='delete_product'),
     path('dashboard/product/edit/<int:product_id>/', views.edit_product, name='edit_product'),
     path('home/<int:product_id>/', views.products_detail, name='product_detail'),
+
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
