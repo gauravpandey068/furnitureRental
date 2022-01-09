@@ -29,6 +29,7 @@
                             {% if request.user.is_staff %}
                                 <li><a class="dropdown-item" href="{% url 'dashboard' %}">DashBoard</a></li>
                             {% endif %}
+                            <li><a class="dropdown-item" href="{% url 'my_rent_products' %}">My Rent Products</a></li>
                             <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider" />

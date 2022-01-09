@@ -2,8 +2,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from app.decorators import user_information_required
 from app.forms import RentForm
-from app.models import Product
+from app.models import Product, Rent
 
 
 def home(request):
@@ -16,7 +17,8 @@ def products_detail(request, product_id):
     return render(request, 'products_detail.html', {'product': product})
 
 
-@login_required(login_url='/login')
+@login_required(login_url='login')
+@user_information_required
 def rent(request, product_id):
     request_product = Product.objects.get(id=product_id)
     if request.method == 'POST':
@@ -37,3 +39,9 @@ def rent(request, product_id):
         form = RentForm(initial={'product': product, 'user': user})
 
     return render(request, 'rent_form.html', {'form': form})
+
+
+@login_required(login_url='login')
+def my_rent_products(request):
+    rents = Rent.objects.filter(user=request.user)
+    return render(request, 'my_rent_products.html', {'rents': rents})
