@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
@@ -22,10 +23,13 @@ def rent(request, product_id):
         form = RentForm(request.POST, initial={'product': request_product, 'user': request.user.pk})
         if form.is_valid():
             rents = form.save(commit=False)
-            rents.rental_day = rents.end_date - rents.start_date
+            rents.rental_day = int((rents.end_date - rents.start_date).days)
             rents.total_price = rents.rental_day * request_product.price * rents.quantity
-            print(rents)
+            rents.save()
             return redirect('index')
+        else:
+            messages.error(request, form.errors)
+
     else:
         product = request_product.pk
         user = request.user.pk

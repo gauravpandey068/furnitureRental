@@ -9,10 +9,10 @@ class RentForm(forms.ModelForm):
 
     user = forms.ModelChoiceField(queryset=User.objects.all(), required=True, widget=forms.HiddenInput())
     product = forms.ModelChoiceField(queryset=Product.objects.all(), required=True, widget=forms.HiddenInput())
-    status = forms.ChoiceField(choices=Rent.Status.choices, required=True, widget=forms.HiddenInput())
-    rental_day = forms.IntegerField(widget=forms.HiddenInput())
-    total_price = forms.IntegerField(widget=forms.HiddenInput())
-    is_returned = forms.BooleanField(widget=forms.HiddenInput())
+    status = forms.ChoiceField(choices=Rent.Status.choices, widget=forms.HiddenInput(), initial=Rent.Status.pending)
+    rental_day = forms.IntegerField(widget=forms.HiddenInput(), required=False)
+    total_price = forms.IntegerField(widget=forms.HiddenInput(), required=False)
+    is_returned = forms.BooleanField(widget=forms.HiddenInput(), required=False)
     start_date = forms.DateField(widget=forms.SelectDateWidget(years=range(2022, 2023)))
     end_date = forms.DateField(widget=forms.SelectDateWidget(years=range(2022, 2023)))
 
