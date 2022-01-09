@@ -38,6 +38,13 @@
                     <td>{{ rent.total_price }}</td>
                     <td>{{ rent.status }}</td>
                     <td>{{ rent.is_returned }}</td>
+                    <td>
+                        {% if rent.status == 'pending' %}
+                            <a href="{% url 'cancel_rent' rent.pk %}" class="btn btn-danger">Cancel</a>
+                        {% else %}
+                            <a href="#" class="btn btn-success">Return</a>
+                        {% endif %}
+                    </td>
 
                 </tr>
                 {% endfor %}
@@ -49,5 +56,5 @@
             </div>
         {% endif %}
     </div>
-
+</div>
 {% endblock %}

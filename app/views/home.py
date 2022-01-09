@@ -45,3 +45,10 @@ def rent(request, product_id):
 def my_rent_products(request):
     rents = Rent.objects.filter(user=request.user)
     return render(request, 'my_rent_products.html', {'rents': rents})
+
+
+@login_required(login_url='login')
+def cancel_rent(request, rent_id):
+    rents = Rent.objects.get(id=rent_id)
+    rents.delete()
+    return redirect('my_rent_products')

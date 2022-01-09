@@ -13,6 +13,7 @@ urlpatterns = [
     path('home/<int:product_id>/', views.products_detail, name='product_detail'),
     path('home/rent/<int:product_id>/', views.rent, name='rent'),
     path('home/rent/my-rent-products/', views.my_rent_products, name='my_rent_products'),
+    path('home/rent/my-rent-products/cancel-product/<int:rent_id>/', views.cancel_rent, name='cancel_rent'),
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
