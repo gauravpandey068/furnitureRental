@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+
+from app.forms import RentForm
 from app.models import Product
 
 
@@ -9,5 +12,24 @@ def home(request):
 
 def products_detail(request, product_id):
     product = Product.objects.get(id=product_id)
-
     return render(request, 'products_detail.html', {'product': product})
+
+
+@login_required(login_url='/login')
+def rent(request, product_id):
+    request_product = Product.objects.get(id=product_id)
+    if request.method == 'POST':
+        form = RentForm(request.POST, initial={'product': request_product, 'user': request.user.pk})
+        if form.is_valid():
+            rents = form.save(commit=False)
+            rents.rental_day = rents.end_date - rents.start_date
+            rents.total_price = rents.rental_day * request_product.price * rents.quantity
+            print(rents)
+            return redirect('index')
+    else:
+        product = request_product.pk
+        user = request.user.pk
+
+        form = RentForm(initial={'product': product, 'user': user})
+
+    return render(request, 'rent_form.html', {'form': form})
