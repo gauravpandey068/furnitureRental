@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from app.forms import ProductForm
-from app.models import Product
+from app.models import Product, Rent
 
 
 @login_required(login_url='/login/')
@@ -58,3 +58,32 @@ def edit_product(request, product_id):
         form = ProductForm(instance=product)
 
     return render(request, 'add_product.html', {"form": form})
+
+
+@login_required(login_url='login')
+@staff_member_required()
+def pending_rent_requests(request):
+    rent_request = Rent.objects.filter(status='pending')
+
+    context = {
+        'rent_request': rent_request
+    }
+    return render(request, 'pending_rent_requests.html', context)
+
+
+@login_required(login_url='login')
+@staff_member_required()
+def accept_rent_request(request, rent_id):
+    rent = Rent.objects.get(id=rent_id)
+    rent.status = 'rented'
+    rent.save()
+    return redirect('pending_rent_requests')
+
+
+@login_required(login_url='login')
+@staff_member_required()
+def reject_rent_request(request, rent_id):
+    rent = Rent.objects.get(id=rent_id)
+    rent.status = 'rejected'
+    rent.save()
+    return redirect('pending_rent_requests')

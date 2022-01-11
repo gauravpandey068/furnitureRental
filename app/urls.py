@@ -6,14 +6,21 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='index'),
-    path('dashboard/', views.dashboard, name='dashboard'),
-    path('dashboard/add-product/', views.add_product, name='add_product'),
-    path('dashboard/product/delete/<int:product_id>/', views.delete_product, name='delete_product'),
-    path('dashboard/product/edit/<int:product_id>/', views.edit_product, name='edit_product'),
     path('home/<int:product_id>/', views.products_detail, name='product_detail'),
     path('home/rent/<int:product_id>/', views.rent, name='rent'),
     path('home/rent/my-rent-products/', views.my_rent_products, name='my_rent_products'),
     path('home/rent/my-rent-products/cancel-product/<int:rent_id>/', views.cancel_rent, name='cancel_rent'),
+
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard/add-product/', views.add_product, name='add_product'),
+    path('dashboard/product/delete/<int:product_id>/', views.delete_product, name='delete_product'),
+    path('dashboard/product/edit/<int:product_id>/', views.edit_product, name='edit_product'),
+    path('dashboard/rent/request/all/status/pending/', views.pending_rent_requests, name='pending_rent_requests'),
+    path('dashboard/rent/all/request/approved/<int:rent_id>/', views.accept_rent_request,
+         name='accepted_rent_requests'),
+    path('dashboard/rent/all/request/rejected/<int:rent_id>/', views.reject_rent_request,
+         name='rejected_rent_requests'),
+
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
