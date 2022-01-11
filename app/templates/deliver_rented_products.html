@@ -1,13 +1,13 @@
 {% extends 'db_base.html' %}
-{% block db_title %}Rent Request{% endblock %}
+{% block db_title %}Waiting For Delivery{% endblock %}
 {% block db_content %}
     <div class="card">
         <div class="card-header">
-            <h4>Rent Request</h4>
+            <h4>Waiting for Delivery</h4>
         </div>
         <div class="card-body">
-        {% if rent_request %}
-            {% for rent in rent_request %}
+        {% if rented_products %}
+            {% for rent in rented_products %}
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingOne">
@@ -54,8 +54,7 @@
                                     </tbody>
                                 </table>
                                 <div class="card-footer">
-                                    <a href="{% url 'accepted_rent_requests' rent.pk %}" class="btn btn-success">Accept</a>
-                                    <a href="{% url 'rejected_rent_requests' rent.pk %}" class="btn btn-danger">Reject</a>
+                                    <a href="{% url 'delivered_rented_products' rent.pk %}" class="btn btn-success">Shipped</a>
                                 </div>
 
                             </div>
@@ -64,9 +63,10 @@
                 </div>
             {% endfor %}
         {% else %}
-        <div class="alert alert-info">
-            <strong>Info!</strong> No Rent Request Found.
-        </div>
+            <div class="alert alert-info">
+                <strong>Info!</strong> No Product To Deliver.
+            </div>
         {% endif %}
+        </div>
     </div>
 {% endblock %}

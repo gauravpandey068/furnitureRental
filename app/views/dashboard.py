@@ -87,3 +87,34 @@ def reject_rent_request(request, rent_id):
     rent.status = 'rejected'
     rent.save()
     return redirect('pending_rent_requests')
+
+
+@login_required(login_url='login')
+@staff_member_required()
+def delivery_rented_products(request):
+    products = Rent.objects.filter(status='rented', is_rented=False).order_by('created_at')
+
+    context = {
+        'rented_products': products
+    }
+    return render(request, 'deliver_rented_products.html', context)
+
+
+@login_required(login_url='login')
+@staff_member_required()
+def delivered_rented_products(request, rent_id):
+    rent = Rent.objects.get(id=rent_id)
+    rent.is_rented = True
+    rent.save()
+    return redirect('delivery_rented_products')
+
+
+@login_required(login_url='login')
+@staff_member_required()
+def rented_products(request):
+    rented_product = Rent.objects.filter(is_rented=True).order_by('created_at')
+
+    context = {
+        'rented_product': rented_product
+    }
+    return render(request, 'rented_products.html', context)

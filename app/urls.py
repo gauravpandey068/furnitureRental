@@ -20,6 +20,10 @@ urlpatterns = [
          name='accepted_rent_requests'),
     path('dashboard/rent/all/request/rejected/<int:rent_id>/', views.reject_rent_request,
          name='rejected_rent_requests'),
+    path('dashboard/rent/all/wait-for-delivey/', views.delivery_rented_products, name='delivery_rented_products'),
+    path('dashboard/rent/all/delivered/<int:rent_id>/', views.delivered_rented_products,
+         name='delivered_rented_products'),
+    path('dashboard/rent/all/rented-products/', views.rented_products, name='rented_products'),
 
 ]
 urlpatterns += staticfiles_urlpatterns()

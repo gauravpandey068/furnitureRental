@@ -1,13 +1,13 @@
 {% extends 'db_base.html' %}
-{% block db_title %}Rent Request{% endblock %}
+{% block db_title %}Rented Products{% endblock %}
 {% block db_content %}
     <div class="card">
         <div class="card-header">
-            <h4>Rent Request</h4>
+            <h4>Rented Furniture</h4>
         </div>
         <div class="card-body">
-        {% if rent_request %}
-            {% for rent in rent_request %}
+        {% if rented_product %}
+            {% for rent in rented_product %}
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingOne">
@@ -36,6 +36,7 @@
                                         <th scope="col">Total Day</th>
                                         <th scope="col">Total Price</th>
                                         <th scope="col">Status</th>
+                                        <th scope="col">Is_Rented</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -50,14 +51,10 @@
                                         <td>{{ rent.rental_day }}</td>
                                         <td>{{ rent.total_price }}</td>
                                         <td>{{ rent.status }}</td>
+                                        <td>{{ rent.is_rented }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
-                                <div class="card-footer">
-                                    <a href="{% url 'accepted_rent_requests' rent.pk %}" class="btn btn-success">Accept</a>
-                                    <a href="{% url 'rejected_rent_requests' rent.pk %}" class="btn btn-danger">Reject</a>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -65,7 +62,7 @@
             {% endfor %}
         {% else %}
         <div class="alert alert-info">
-            <strong>Info!</strong> No Rent Request Found.
+            <strong>Info!</strong> No Rented Products Found.
         </div>
         {% endif %}
     </div>
