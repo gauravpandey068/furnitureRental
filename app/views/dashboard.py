@@ -63,7 +63,7 @@ def edit_product(request, product_id):
 @login_required(login_url='login')
 @staff_member_required()
 def pending_rent_requests(request):
-    rent_request = Rent.objects.filter(status='pending')
+    rent_request = Rent.objects.filter(status='pending').order_by('created_at')
 
     context = {
         'rent_request': rent_request

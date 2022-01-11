@@ -43,7 +43,7 @@ def rent(request, product_id):
 
 @login_required(login_url='login')
 def my_rent_products(request):
-    rents = Rent.objects.filter(user=request.user)
+    rents = Rent.objects.filter(user=request.user).order_by('created_at')
     return render(request, 'my_rent_products.html', {'rents': rents})
 
 
