@@ -17,6 +17,7 @@ class Rent(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     rental_day = models.IntegerField(default=0)
+    is_rented = models.BooleanField(default=False)
     is_returned = models.BooleanField(default=False)
     status = models.CharField(max_length=10, choices=Status.choices, default=Status.pending)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
