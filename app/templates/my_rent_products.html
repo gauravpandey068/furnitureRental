@@ -20,7 +20,6 @@
                     <th>Total Rental Day</th>
                     <th>Total Rental Price</th>
                     <th>Status</th>
-                    <th>Is_Returned</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -37,12 +36,17 @@
                     <td>{{ rent.rental_day }}</td>
                     <td>{{ rent.total_price }}</td>
                     <td>{{ rent.status }}</td>
-                    <td>{{ rent.is_returned }}</td>
                     <td>
                         {% if rent.status == 'pending' %}
                             <a href="{% url 'cancel_rent' rent.pk %}" class="btn btn-danger">Cancel</a>
+                        {% elif rent.status == 'rejected' %}
+                            <a href="{% url 'product_detail' rent.product.pk %}" class="btn btn-primary">Rent Again</a>
                         {% else %}
-                            <a href="#" class="btn btn-success">Return</a>
+                            {% if rent.is_rented %}
+                                <a href="#" class="btn btn-success">Return</a>
+                            {% else %}
+                                <p class="text-center text-info">Waiting for delivery</p>
+                            {% endif %}
                         {% endif %}
                     </td>
 
