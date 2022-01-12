@@ -8,13 +8,18 @@ from app.models import Product, Rent
 
 
 def home(request):
-    products = Product.objects.all()
-    return render(request, 'index.html', {'products': products})
+    products = Product.objects.all().order_by('?')
+    new_products = Product.objects.all().order_by('created_at')[:4]
+    context = {
+        'products': products,
+        'new_products': new_products
+    }
+    return render(request, 'index.html', context)
 
 
 def products_detail(request, product_id):
     product = Product.objects.get(id=product_id)
-    all_products = Product.objects.all().order_by('?')
+    all_products = Product.objects.all().order_by('?')[:3]
 
     context = {
         'product': product,

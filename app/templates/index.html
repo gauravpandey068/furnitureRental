@@ -3,24 +3,58 @@
 
 {% block content %}
     <div class="d-flex">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <h2 class="text-center mt-2">TODO</h2>
         </div>
-        <div class="col-md">
-            <div class="row mt-2">
-                {% for product in products %}
-                    <div class="card m-2" style="width: 25rem;">
-                        <a href="{% url 'product_detail' product.pk %}" class="m-3 p-1 text-decoration-none text-black">
-                            <img src="{{ product.image.url }}" class="card-img-top"  width="200" height="200" alt="{{product.image}}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ product.name|truncatechars:'90' }}</h5>
-                                    <p class="card-text">
-                                        <span class="badge bg-danger">Price {{ product.price }} per day</span>
-                                    </p>
+        <div class="col-md-9">
+
+            <div class="card mt-5">
+                <div class="card-header">
+                    <h4>New Furniture's in Store</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for product in new_products %}
+                            <div class="card m-2" style="width: 25rem;">
+                                <a href="{% url 'product_detail' product.pk %}"
+                                   class="m-3 p-1 text-decoration-none text-black">
+                                    <img src="{{ product.image.url }}" class="card-img-top" width="200" height="200"
+                                         alt="{{ product.image }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ product.name|truncatechars:'90' }}</h5>
+                                        <p class="card-text">
+                                            <span class="badge bg-danger">Price {{ product.price }} per day</span>
+                                        </p>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
+                        {% endfor %}
                     </div>
-                {% endfor %}
+                </div>
+            </div>
+            <div class="card mt-5">
+                <div class="card-header">
+                    <h4>All Furniture's in Store</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for product in products %}
+                            <div class="card m-2" style="width: 25rem;">
+                                <a href="{% url 'product_detail' product.pk %}"
+                                   class="m-3 p-1 text-decoration-none text-black">
+                                    <img src="{{ product.image.url }}" class="card-img-top" width="200" height="200"
+                                         alt="{{ product.image }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ product.name|truncatechars:'90' }}</h5>
+                                        <p class="card-text">
+                                            <span class="badge bg-danger">Price {{ product.price }} per day</span>
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
