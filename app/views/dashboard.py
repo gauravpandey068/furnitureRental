@@ -118,3 +118,45 @@ def rented_products(request):
         'rented_product': rented_product
     }
     return render(request, 'rented_products.html', context)
+
+
+@login_required(login_url='login')
+@staff_member_required()
+def accept_return_request(request, rent_id):
+    rent = Rent.objects.get(id=rent_id)
+    rent.is_returned = True
+    rent.save()
+    return redirect('return_request')
+
+
+@login_required(login_url='login')
+@staff_member_required()
+def all_rent_request(request):
+    rent_request = Rent.objects.filter(status='returned', is_returned=False).order_by('created_at')
+
+    context = {
+        'rent_request': rent_request
+    }
+    return render(request, 'all_rent_request.html', context)
+
+
+@login_required(login_url='login')
+@staff_member_required()
+def return_product(request):
+    return_furniture = Rent.objects.filter(is_returned=True).order_by('created_at')
+
+    context = {
+        'return_furniture': return_furniture
+    }
+    return render(request, 'return_product.html', context)
+
+
+@login_required(login_url='login')
+@staff_member_required()
+def activity(request):
+    all_rent = Rent.objects.all().order_by('created_at')
+
+    context = {
+        'all_rent': all_rent
+    }
+    return render(request, 'all_rent_activity.html', context)

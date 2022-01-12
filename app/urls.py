@@ -10,6 +10,8 @@ urlpatterns = [
     path('home/rent/<int:product_id>/', views.rent, name='rent'),
     path('home/rent/my-rent-products/', views.my_rent_products, name='my_rent_products'),
     path('home/rent/my-rent-products/cancel-product/<int:rent_id>/', views.cancel_rent, name='cancel_rent'),
+    path('dashboard/rent/all/rented-products/return/request/<int:rent_id>/', views.return_request,
+         name='return_request'),
 
     path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard/add-product/', views.add_product, name='add_product'),
@@ -24,6 +26,11 @@ urlpatterns = [
     path('dashboard/rent/all/delivered/<int:rent_id>/', views.delivered_rented_products,
          name='delivered_rented_products'),
     path('dashboard/rent/all/rented-products/', views.rented_products, name='rented_products'),
+    path('dashboard/rent/all/rented-products/return/request/accept/<int:rent_id>/', views.accept_return_request,
+         name='accept_return_request'),
+    path('dashboard/rent/all/rented-products/return/request/', views.all_rent_request, name='all_rent_return_requests'),
+    path('dashboard/rent/all/rented-products/return/', views.return_product, name='return_product'),
+    path('dashboard/rent/all/', views.activity, name='all_rent'),
 
 ]
 urlpatterns += staticfiles_urlpatterns()
