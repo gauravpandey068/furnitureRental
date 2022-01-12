@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.postgres.search import SearchVector
 from django.shortcuts import render, redirect
 
 from app.decorators import user_information_required
@@ -76,7 +77,7 @@ def return_request(request, rent_id):
 
 def search(request):
     query = request.GET.get('query')
-    products = Product.objects.filter(name__contains=query)
+    products = Product.objects.annotate(search=SearchVector('name', 'brand')).filter(search=query)
     context = {
         'products': products,
         'query': query
