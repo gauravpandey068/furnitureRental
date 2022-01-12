@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <div class="row">
                         {% for product in new_products %}
-                            <div class="card m-2" style="width: 25rem;">
+                            <div class="card m-2" style="width: 20rem;">
                                 <a href="{% url 'product_detail' product.pk %}"
                                    class="m-3 p-1 text-decoration-none text-black">
                                     <img src="{{ product.image.url }}" class="card-img-top" width="200" height="200"
@@ -30,14 +30,14 @@
                     </div>
                 </div>
             </div>
-            <div class="card mt-5">
+            <div class="card mt-3">
                 <div class="card-header">
                     <h4>All Furniture's in Store</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         {% for product in products %}
-                            <div class="card m-2" style="width: 25rem;">
+                            <div class="card m-2" style="width: 20rem;">
                                 <a href="{% url 'product_detail' product.pk %}"
                                    class="m-3 p-1 text-decoration-none text-black">
                                     <img src="{{ product.image.url }}" class="card-img-top" width="200" height="200"
