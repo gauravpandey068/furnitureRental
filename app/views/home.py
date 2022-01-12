@@ -9,7 +9,7 @@ from app.models import Product, Rent
 
 def home(request):
     products = Product.objects.all().order_by('?')
-    new_products = Product.objects.all().order_by('created_at')[:4]
+    new_products = Product.objects.all().order_by('created_at')[:5]
     context = {
         'products': products,
         'new_products': new_products
