@@ -52,3 +52,11 @@ def cancel_rent(request, rent_id):
     rents = Rent.objects.get(id=rent_id)
     rents.delete()
     return redirect('my_rent_products')
+
+
+@login_required(login_url='login')
+def return_request(request, rent_id):
+    rents = Rent.objects.get(id=rent_id)
+    rents.status = 'returned'
+    rents.save()
+    return redirect('my_rent_products')
