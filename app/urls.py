@@ -12,6 +12,7 @@ urlpatterns = [
     path('home/rent/my-rent-products/cancel-product/<int:rent_id>/', views.cancel_rent, name='cancel_rent'),
     path('dashboard/rent/all/rented-products/return/request/<int:rent_id>/', views.return_request,
          name='return_request'),
+    path('home/search/', views.search, name='search'),
 
     path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard/add-product/', views.add_product, name='add_product'),

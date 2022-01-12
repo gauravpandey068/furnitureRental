@@ -72,3 +72,13 @@ def return_request(request, rent_id):
     rents.status = 'returned'
     rents.save()
     return redirect('my_rent_products')
+
+
+def search(request):
+    query = request.GET.get('query')
+    products = Product.objects.filter(name__contains=query)
+    context = {
+        'products': products,
+        'query': query
+    }
+    return render(request, 'search.html', context)
