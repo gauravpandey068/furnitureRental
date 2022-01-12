@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Product
+from app.models import Product, Comment
 from app.models.rent import Rent
 
 
@@ -15,6 +15,13 @@ class RentAdmin(admin.ModelAdmin):
     search_fields = ['product', 'user']
 
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('product', 'user', 'text', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ['product', 'user']
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Rent, RentAdmin)
+admin.site.register(Comment, CommentAdmin)
 
