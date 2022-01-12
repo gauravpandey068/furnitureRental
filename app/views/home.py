@@ -14,7 +14,14 @@ def home(request):
 
 def products_detail(request, product_id):
     product = Product.objects.get(id=product_id)
-    return render(request, 'products_detail.html', {'product': product})
+    all_products = Product.objects.all().order_by('?')
+
+    context = {
+        'product': product,
+        'all_products': all_products
+
+    }
+    return render(request, 'products_detail.html', context)
 
 
 @login_required(login_url='login')
