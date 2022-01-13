@@ -16,7 +16,7 @@ class RentAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('product', 'user', 'text', 'created_at')
+    list_display = ('product', 'user', 'comment', 'created_at')
     list_filter = ('created_at',)
     search_fields = ['product', 'user']
 
@@ -24,4 +24,3 @@ class CommentAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Rent, RentAdmin)
 admin.site.register(Comment, CommentAdmin)
-
