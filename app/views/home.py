@@ -5,7 +5,8 @@ from django.shortcuts import render, redirect
 
 from app.decorators import user_information_required
 from app.forms import RentForm
-from app.models import Product, Rent
+from app.forms.comment import CommentForm
+from app.models import Product, Rent, Comment
 
 
 def home(request):
@@ -19,13 +20,27 @@ def home(request):
 
 
 def products_detail(request, product_id):
+
     product = Product.objects.get(id=product_id)
-    all_products = Product.objects.all().order_by('?')[:3]
+    all_products = Product.objects.all().order_by('?')[:5]
+    comments = Comment.objects.filter(product=product_id)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, initial={'product': product, 'user': request.user.pk})
+        if request.user:
+            if form.is_valid():
+                form.save()
+                return redirect('product_detail', product_id)
+        else:
+            redirect('login')
+    else:
+        form = CommentForm(initial={'product': product, 'user': request.user.pk})
 
     context = {
         'product': product,
-        'all_products': all_products
-
+        'all_products': all_products,
+        'form': form,
+        'comments': comments
     }
     return render(request, 'products_detail.html', context)
 
@@ -86,3 +101,11 @@ def search(request):
         'query': query
     }
     return render(request, 'search.html', context)
+
+
+@login_required(login_url='login')
+def delete_comment(request, comment_id):
+    user = request.user
+    comment = Comment.objects.get(id=comment_id, user=user)
+    comment.delete()
+    return redirect('product_detail', comment.product.id)
