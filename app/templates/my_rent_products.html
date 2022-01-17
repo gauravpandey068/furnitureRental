@@ -47,14 +47,16 @@
                                     {% if rent.is_rented %}
                                         {% if rent.status == 'returned' %}
                                             {% if rent.is_returned %}
-                                                <a href="{% url 'product_detail' rent.product.pk %}"
-                                                   class="btn btn-primary">Rent Again</a>
+                                                <a href="{% url 'billing' rent.pk %}"
+                                                   class="btn btn-info">Bill</a>
                                             {% else %}
                                                 <p class="text-center text-primary">Waiting for Pick up</p>
                                             {% endif %}
                                         {% else %}
                                             <a href="{% url 'return_request' rent.pk %}"
                                                class="btn btn-success">Return</a>
+                                            <a href="{% url 'billing' rent.pk %}"
+                                               class="btn btn-info">Bill</a>
                                         {% endif %}
                                     {% else %}
                                         <p class="text-center text-info">Waiting for delivery</p>

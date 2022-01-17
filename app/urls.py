@@ -14,6 +14,7 @@ urlpatterns = [
          name='return_request'),
     path('home/search/', views.search, name='search'),
     path('home/products/comments/delete/<int:comment_id>/', views.delete_comment, name='delete_comment'),
+    path('home/products/billing/<int:product_id>/', views.billing, name='billing'),
 
     path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard/add-product/', views.add_product, name='add_product'),
