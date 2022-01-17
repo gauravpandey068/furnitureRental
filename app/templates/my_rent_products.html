@@ -48,7 +48,7 @@
                                         {% if rent.status == 'returned' %}
                                             {% if rent.is_returned %}
                                                 <a href="{% url 'billing' rent.pk %}"
-                                                   class="btn btn-info">Bill</a>
+                                                   class="btn btn-info" target="_blank">Bill</a>
                                             {% else %}
                                                 <p class="text-center text-primary">Waiting for Pick up</p>
                                             {% endif %}
@@ -56,7 +56,7 @@
                                             <a href="{% url 'return_request' rent.pk %}"
                                                class="btn btn-success">Return</a>
                                             <a href="{% url 'billing' rent.pk %}"
-                                               class="btn btn-info">Bill</a>
+                                               class="btn btn-info" target="_blank">Bill</a>
                                         {% endif %}
                                     {% else %}
                                         <p class="text-center text-info">Waiting for delivery</p>

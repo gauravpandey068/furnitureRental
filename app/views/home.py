@@ -1,12 +1,17 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.template import Context
+from django.template.loader import get_template
 
 from app.decorators import user_information_required
 from app.forms import RentForm
 from app.forms.comment import CommentForm
 from app.models import Product, Rent, Comment
+from io import BytesIO
+from xhtml2pdf import pisa
 
 
 def home(request):
@@ -20,7 +25,6 @@ def home(request):
 
 
 def products_detail(request, product_id):
-
     product = Product.objects.get(id=product_id)
     all_products = Product.objects.all().order_by('?')[:5]
     comments = Comment.objects.filter(product=product_id)
@@ -109,3 +113,29 @@ def delete_comment(request, comment_id):
     comment = Comment.objects.get(id=comment_id, user=user)
     comment.delete()
     return redirect('product_detail', comment.product.id)
+
+
+@login_required(login_url='login')
+def billing(request, product_id):
+    rent_prod = Rent.objects.get(id=product_id)
+    price = rent_prod.product.price * rent_prod.quantity
+    context = {
+        'rent': rent_prod,
+        'price': price,
+    }
+    return render(request, 'billing.html', context)
+
+
+def render_to_pdf(template_src, context_dict=None):
+    if context_dict is None:
+        context_dict = {}
+    template = get_template(template_src)
+    html = template.render(context_dict)
+    result = BytesIO()
+
+    # This part will create the pdf.
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return None
+
