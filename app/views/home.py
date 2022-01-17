@@ -71,7 +71,7 @@ def rent(request, product_id):
         form = RentForm(initial={'product': product, 'user': user, 'start_date': date.today() + timedelta(1),
                                  'end_date': date.today() + timedelta(2)})
 
-    return render(request, 'rent_form.html', {'form': form})
+    return render(request, 'rent_form.html', {'form': form, 'product': request_product})
 
 
 @login_required(login_url='login')
