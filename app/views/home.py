@@ -1,9 +1,10 @@
+from datetime import date, timedelta
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.template import Context
 from django.template.loader import get_template
 
 from app.decorators import user_information_required
@@ -63,12 +64,12 @@ def rent(request, product_id):
             return redirect('index')
         else:
             messages.error(request, form.errors)
-
     else:
         product = request_product.pk
         user = request.user.pk
 
-        form = RentForm(initial={'product': product, 'user': user})
+        form = RentForm(initial={'product': product, 'user': user, 'start_date': date.today() + timedelta(1),
+                                 'end_date': date.today() + timedelta(2)})
 
     return render(request, 'rent_form.html', {'form': form})
 
@@ -138,4 +139,3 @@ def render_to_pdf(template_src, context_dict=None):
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type='application/pdf')
     return None
-
