@@ -3,15 +3,42 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+            integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <title>Billing of {{ request.user.username }}</title>
 </head>
+<script type="text/javascript">
+    // convert billImg div to pdf
+    function saveImg() {
+        const element = document.getElementById('billImg');
+        const opt = {
+            margin: 0.2,
+            filename: 'bill.pdf',
+            image: {type: 'jpeg', quality: 0.98},
+            html2canvas: {scale: 2},
+            jsPDF: {unit: 'in', format: 'letter', orientation: 'landscape'}
+        };
+        html2pdf().set(opt).from(element).save();
+    }
+</script>
 <body>
 <div class="container mt-5">
-    <div class="card">
+    <button class="btn btn-primary mb-5" onclick="saveImg()">Save Bill</button>
+    <div class="card" id="billImg">
         <div class="card-header">
+            <h3 class="text-center text-dark">
+                Furniture Rental
+            </h3>
             Invoice Date:
-            <strong>{{ rent.created_at}}</strong>
+            <strong>{{ rent.created_at }}</strong>
             <span class="float-right"> <strong>Method:</strong> Cash in Hand</span>
+
 
         </div>
         <div class="card-body">
@@ -19,11 +46,11 @@
                 <div class="col-sm-6">
                     <h6 class="mb-3">Billing Address:</h6>
                     <div>
-                        <strong>{{ rent.user.first_name}} {{ rent.user.last_name }}</strong>
+                        <strong>{{ rent.user.first_name }} {{ rent.user.last_name }}</strong>
                     </div>
-                    <div>{{ rent.user.userinformation.delivery_address}}</div>
-                    <div>Email: {{ rent.user.email}}</div>
-                    <div>Phone: {{ rent.user.userinformation.phone}}</div>
+                    <div>{{ rent.user.userinformation.delivery_address }}</div>
+                    <div>Email: {{ rent.user.email }}</div>
+                    <div>Phone: {{ rent.user.userinformation.phone }}</div>
                 </div>
 
             </div>
@@ -46,12 +73,12 @@
                     <tr>
                         <td class="center">1</td>
                         <td class="left strong">{{ rent.product.name }}</td>
-                        <td class="left">{{ rent.product.brand}}</td>
+                        <td class="left">{{ rent.product.brand }}</td>
 
                         <td class="right">Rs {{ rent.product.price }}</td>
                         <td class="center">{{ rent.quantity }}</td>
                         <td class="center">{{ rent.rental_day }}</td>
-                        <td class="right">Rs {{ rent.total_price}}</td>
+                        <td class="right">Rs {{ rent.total_price }}</td>
                     </tr>
                     <tr>
                         <td class="center">2</td>
